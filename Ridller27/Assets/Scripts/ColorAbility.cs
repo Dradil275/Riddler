@@ -9,27 +9,41 @@ public class ColorAbility : MonoBehaviour
     RaycastHit hit;
     float maxDistance;
     Material newMaterial;
-    // Start is called before the first frame update
+    
+   
     void Start()
     {
         maxDistance = 100f;
-        origin = origin = Camera.GetComponent<Camera>().ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0));
+        origin = Camera.GetComponent<Camera>().ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0));
     }
 
-    // Update is called once per frame
+
     void Update()
     {
-        if (Input.GetMouseButton(0) == true)
+        if (Input.GetMouseButtonDown(1))
         {
 
-            if (Physics.Raycast(origin, Camera.transform.forward, out hit, maxDistance) == true)
+            if (Physics.Raycast(origin, Camera.transform.forward, out hit, maxDistance))
             {
                 newMaterial = hit.transform.GetComponent<MeshRenderer>().material;
+             /*   if (hit.transform.tag == "color")
+                {
+                    newMaterial = hit.transform.GetComponent<MeshRenderer>().material;
+                }*/
             }
         }
-        if(Input.GetMouseButton(1) == true)
+        if (Input.GetMouseButtonDown(0))
         {
-            hit.transform.GetComponent<MeshRenderer>().material = newMaterial;
+         
+            if (Physics.Raycast(origin, Camera.transform.forward, out hit, maxDistance))
+            {
+                hit.transform.GetComponent<MeshRenderer>().material = newMaterial;
+             /*   if (hit.transform.tag == "colorObject")
+                {
+                    hit.transform.GetComponent<MeshRenderer>().material = newMaterial;
+                }*/
+            }
         }
+       
     }
 }

@@ -23,7 +23,7 @@ public class PlayerEngine : MonoBehaviour
     public LayerMask Ground;
     float gravity;
     Vector3 velocity;
-    Vector3 Jump;
+ 
     // Start is called before the first frame update
     void Start()
     {
@@ -33,7 +33,7 @@ public class PlayerEngine : MonoBehaviour
         controller = GetComponent<CharacterController>();
         radius = 1;
         gravity = -9.81f;
-        Jump.y = 5;
+        
     }
 
     // Update is called once per frame
