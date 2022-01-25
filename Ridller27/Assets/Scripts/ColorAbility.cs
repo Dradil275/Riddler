@@ -66,21 +66,21 @@ public class ColorAbility : MonoBehaviour
         if (SphereG.GetComponent<MeshRenderer>().material.color == Green.color)
         {
             isGreen = true;
-            Debug.Log("green active");
+            
         }
         else isGreen = false;
 
         if (SphereY.GetComponent<MeshRenderer>().material.color == Yellow.color)
         {
             isYellow = true;
-            Debug.Log("yellow active");
+            
         }
         else isYellow = false;
 
         if (SphereR.GetComponent<MeshRenderer>().material.color == Red.color)
         {
             isRed = true;
-            Debug.Log("red active");
+           
         }
         else isRed = false;
 
