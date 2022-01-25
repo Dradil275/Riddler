@@ -9,41 +9,87 @@ public class ColorAbility : MonoBehaviour
     RaycastHit hit;
     float maxDistance;
     Material newMaterial;
-    
-   
+    public GameObject Door;
+    public Material Green;
+    public Material Yellow;
+    public Material Red;
+    Material originalCrystalMat;
+    public GameObject SphereG;
+    public GameObject SphereY;
+    public GameObject SphereR;
+    public GameObject WandCrystal;
+    bool isGreen;
+    bool isYellow;
+    bool isRed;
+    bool isAbilty;
+
     void Start()
     {
-        maxDistance = 100f;
-        origin = Camera.GetComponent<Camera>().ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0));
+        isAbilty = true;
+        maxDistance = 30f;
+        originalCrystalMat = WandCrystal.GetComponent<MeshRenderer>().material;
     }
 
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(1))
-        {
+        if (isAbilty)
+        { //color ability (raycast)
+            origin = Camera.GetComponent<Camera>().ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0));
+            if (Input.GetMouseButtonDown(1))
+            {
+                Debug.DrawRay(origin, Camera.transform.forward * maxDistance);
+                if (Physics.Raycast(origin, Camera.transform.forward, out hit, maxDistance))
+                {
 
-            if (Physics.Raycast(origin, Camera.transform.forward, out hit, maxDistance))
+                    if (hit.collider.tag == "color")
+                    {
+                        newMaterial = hit.transform.GetComponent<MeshRenderer>().material;
+                        WandCrystal.GetComponent<MeshRenderer>().material = newMaterial;
+                    }
+                }
+            }
+            if (Input.GetMouseButtonDown(0))
             {
-                newMaterial = hit.transform.GetComponent<MeshRenderer>().material;
-             /*   if (hit.transform.tag == "color")
+
+                if (Physics.Raycast(origin, Camera.transform.forward, out hit, maxDistance))
                 {
-                    newMaterial = hit.transform.GetComponent<MeshRenderer>().material;
-                }*/
+
+                    if (hit.collider.tag == "colorObject")
+                    {
+                        hit.transform.GetComponent<MeshRenderer>().material = newMaterial;
+                    }
+                }
             }
         }
-        if (Input.GetMouseButtonDown(0))
+        // check if solcved
+        if (SphereG.GetComponent<MeshRenderer>().material.color == Green.color)
         {
-         
-            if (Physics.Raycast(origin, Camera.transform.forward, out hit, maxDistance))
-            {
-                hit.transform.GetComponent<MeshRenderer>().material = newMaterial;
-             /*   if (hit.transform.tag == "colorObject")
-                {
-                    hit.transform.GetComponent<MeshRenderer>().material = newMaterial;
-                }*/
-            }
+            isGreen = true;
+            Debug.Log("green active");
         }
-       
+        else isGreen = false;
+
+        if (SphereY.GetComponent<MeshRenderer>().material.color == Yellow.color)
+        {
+            isYellow = true;
+            Debug.Log("yellow active");
+        }
+        else isYellow = false;
+
+        if (SphereR.GetComponent<MeshRenderer>().material.color == Red.color)
+        {
+            isRed = true;
+            Debug.Log("red active");
+        }
+        else isRed = false;
+
+        //if solved
+        if(isGreen == true && isYellow == true && isRed == true)
+        {
+            Destroy(Door);
+            WandCrystal.GetComponent<MeshRenderer>().material = originalCrystalMat;
+            isAbilty = false;
+        }
     }
 }
