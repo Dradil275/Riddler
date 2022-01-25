@@ -10,7 +10,6 @@ public class RotaionAbility : MonoBehaviour
     public GameObject Girl;
     public GameObject Camera;
     Vector3 origin;
-    Vector3 addRotationToAnegel;
     RaycastHit hit;
     float maxDistance;
     bool isAbilty;
@@ -19,7 +18,7 @@ public class RotaionAbility : MonoBehaviour
     {
         maxDistance = 30;
         isAbilty = true;
-        addRotationToAnegel =new Vector3(0, -105, 0);
+       
     }
 
     // Update is called once per frame
@@ -37,13 +36,18 @@ public class RotaionAbility : MonoBehaviour
                     if (hit.collider.tag == "Protector")
                     {
                         Debug.Log("hit protector");
-                       hit.transform.eulerAngles = new Vector3(gameObject.transform.eulerAngles.x, gameObject.transform.eulerAngles.y - 94, gameObject.transform.eulerAngles.z);
+                        hit.transform.Rotate(new Vector3(0, +94, 0));
                     }
                     if(hit.collider.tag == "Angel")
                     {
                         Debug.Log("Angel");
-                        hit.transform.eulerAngles = new Vector3(gameObject.transform.eulerAngles.x, gameObject.transform.eulerAngles.y - 94, gameObject.transform.eulerAngles.z);
+                        hit.transform.Rotate(new Vector3(0, +105, 0));
                     }
+                    if(hit.collider.tag == "Skeleton")
+                    {
+                        hit.transform.Rotate(new Vector3(0, +90, 0));
+                    }
+                 
                 }
             }
             if (Input.GetMouseButtonDown(0))
@@ -55,12 +59,16 @@ public class RotaionAbility : MonoBehaviour
                     if (hit.collider.tag == "Protector")
                     {
                         Debug.Log("hit protector");
-                        
+                        hit.transform.Rotate(new Vector3(0, -94, 0));
                     }
                     if (hit.collider.tag == "Angel")
                     {
                         Debug.Log("Angel");
-                        hit.transform.Rotate(addRotationToAnegel);
+                        hit.transform.Rotate(new Vector3(0, -105, 0));
+                    }
+                    if (hit.collider.tag == "Skeleton")
+                    {
+                        hit.transform.Rotate(new Vector3(0, -90, 0));
                     }
                 }
             }
