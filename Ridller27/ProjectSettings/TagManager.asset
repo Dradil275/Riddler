@@ -10,6 +10,10 @@ TagManager:
   - Angel
   - Women
   - Skeleton
+  - First
+  - Second
+  - Third
+  - Fourth
   layers:
   - Default
   - TransparentFX

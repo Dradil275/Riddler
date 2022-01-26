@@ -20,8 +20,20 @@ public class ColorAbility : MonoBehaviour
     public GameObject WandCrystal;
     bool isGreen;
     bool isYellow;
-    bool isRed;
+    bool isRed; // and flags
     bool isAbilty;
+
+
+    //FLAGS
+    public GameObject stripR;
+    public GameObject stripW;
+    public GameObject stripB;
+    bool isBlue;
+    bool isWhite;
+    bool isFlagAbilty;
+    public Material white;
+    public Material blue;
+    public GameObject door4;
 
     void Start()
     {
@@ -89,7 +101,39 @@ public class ColorAbility : MonoBehaviour
         {
             Destroy(Door);
             WandCrystal.GetComponent<MeshRenderer>().material = originalCrystalMat;
+        }
+
+        //    FLAGS LEVEL 4 !!!
+
+        // check if solcved
+        if (stripR.GetComponent<MeshRenderer>().material.color == Red.color)
+        {
+            isRed = true;
+
+        }
+        else isRed = false;
+
+        if (stripW.GetComponent<MeshRenderer>().material.color == white.color)
+        {
+            isWhite = true;
+
+        }
+        else isWhite = false;
+
+        if (stripB.GetComponent<MeshRenderer>().material.color == blue.color)
+        {
+            isRed = true;
+
+        }
+        else isRed = false;
+
+        //if solved
+        if (isWhite == true && isBlue == true && isRed == true)
+        {
+            Destroy(door4);
+            WandCrystal.GetComponent<MeshRenderer>().material = originalCrystalMat;
             isAbilty = false;
         }
+
     }
 }
